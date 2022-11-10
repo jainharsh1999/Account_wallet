@@ -20,7 +20,8 @@ from .import views
 
 urlpatterns = [
     path('register', register, name='register'),
-    # path('login', login, name='login'),
-    
+    path('login', login, name='login'),
+    path('verify', verify, name='verify'),
+    path('wallet_dashboard', wallet_dashboard, name='wallet'),
     
 ]

@@ -6,25 +6,19 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <section class="vh-100">
       <div class="container-fluid">
         <div class="row">
             <div
               class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5" style="text-align: center">
               <form style="width: 23rem" action ="" method="post">
                {% csrf_token %}
-                <div
-                  class="form-outline mb-4" style="text-align: center; padding: 10px">
-                  <label class="form-label">email: </label>
-                  <input type="text"  placeholder="email" name="email" style=" padding: 8px; border: none; border-bottom: 2px solid grey;"
-                    class="form-control form-control-lg"/>
-                </div>
+
 
                 <div
                   class="form-outline mb-4"
                   style="text-align: center; padding: 10px">
-                  <label class="form-label" for="form2Example28">Password: </label>
-                 <input type="password"  name="password" placeholder="password" style=" padding: 8px; border: none; border-bottom: 2px solid grey;"
+                  <label class="form-label" for="form2Example28">Mobile Number: </label>
+                 <input type="number"  name="mobile" placeholder="mobile_number" style=" padding: 8px; border: none; border-bottom: 2px solid grey;"
                     class="form-control form-control-lg"/>
                 </div>
 
@@ -33,7 +27,7 @@
                   class="pt-1 mb-4"
                   style="text-align: center; margin-top: 6%">
                   <input class="btn btn-info btn-lg btn-block"  type="submit" value="Login"> </input>
-                  <a class="btn btn-info btn-lg btn-block" href="/reset_password">Reset Password</a>
+                  {% comment %} <a class="btn btn-info btn-lg btn-block" href="/reset_password">Reset Password</a> {% endcomment %}
                 </div>
               </form>
             </div>

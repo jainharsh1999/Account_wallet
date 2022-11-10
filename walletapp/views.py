@@ -1,31 +1,61 @@
 from django.shortcuts import render
 from .models import *
-from django.http import HttpResponse
-from django.conf import settings
+from django.shortcuts import redirect
+import random
+from json import JSONEncoder
 
 
 # Create your views here.
-def  register(request):
+def register(request):
     if request.method == 'POST':
         name = request.POST['name']
-        password = request.POST['password']
+        mobile_number = request.POST['mobile_number']
         email = request.POST['email']
         
-        user=wallet(name=name, password=password, email=email)
+        user=wallet(name=name, mobile_number=mobile_number, email=email)
         user.save()
     return render(request,'register.html')
 
-# def login(request):
-#     if request.method =='POST':
-#         email = request.POST['email']
-#         password = request.POST['password']
-#         emp=wallet.objects.filter(Email=email, password=password)
-#         print(email)
-#         print(password)
+def get_otp():
+    otp = "" 
+    for i in range(4):
+        otp += str(random.randint(1,9))
+    return otp
+    
+def login(request):
+    if request.method =='POST':
+        mobile = request.POST['mobile']
         
-#         if emp.exists():
-#             return HttpResponse("login successfull")
-#         else:
-#             return HttpResponse("404 error")
+        try: 
+            mob = Login.objects.get(mobile=mobile)
+            
+        except:
+            Login.objects.create(mobile=mobile)
+            mob=Login.objects.get(mobile=mobile)    
+            
+        OTP=get_otp()
+        mob.otp=OTP
+        mob.save()
+        request.session['mobile']=mobile
+        return redirect("verify")
         
-#     return render(request, 'login.html')
+    return render(request, 'login.html')
+
+def verify(request):
+    mobile = request.session['mobile']
+    
+    if request.method == "POST":
+        otp = request.POST.get('OTP')
+        verify = Login.objects.get(mobile=mobile)
+        
+        if verify.otp == int(otp):
+            Login.objects.filter(mobile=mobile)
+            print("verify")
+            return redirect('register')
+        else:
+            print("Wrong OTP!")
+            
+    return render(request,'verify.html')      
+
+def wallet_dashboard(request):
+    return render(request, 'wallet.html')
