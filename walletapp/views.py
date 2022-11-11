@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import *
 from django.shortcuts import redirect
 import random
-from json import JSONEncoder
+from .forms import EmployeeForm
 
 
 # Create your views here.
@@ -59,3 +59,26 @@ def verify(request):
 
 def wallet_dashboard(request):
     return render(request, 'wallet.html')
+
+def employees_list(request):
+    employee = wallet.objects.all()
+    return render(request, 'list.html', {"employees":employee})
+
+def update_dashboard(request):
+    form = EmployeeForm()
+
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('employees-list')
+    context = {
+        'form': form,
+    }
+    return render(request, 'update.html', context)
+
+def create_dashboard(request):
+    return render(request, 'create.html')
+
+def delete_dashboard(request):
+    return render(request, 'delete.html')
