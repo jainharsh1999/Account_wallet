@@ -6,12 +6,10 @@ class EmployeeForm(ModelForm):
     class Meta:
         model = wallet
         
-        fields = ('emp_name', 'emp_email', 'emp_contact', 'emp_role', 'emp_salary')
+        fields = ('name', 'email', 'mobile')
 
         widgets = {
-            'emp_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
-            'emp_email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
-            'emp_contact': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Contact No.'}),
-            'emp_role': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Role'}),
-            'emp_salary': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Salary'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
+            'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'mobile'}),
         }

@@ -23,9 +23,8 @@ urlpatterns = [
     path('login', login, name='login'),
     path('verify', verify, name='verify'), 
     path('wallet_dashboard', wallet_dashboard, name='wallet'),
-    path('list/', views.employees_list, name='employees-list'),
-    path('create/', views.create_employee, name='create-employee'),
-    path('edit/<pk>', views.edit_employee, name='edit-employee'),
-    path('delete/<pk>', views.delete_employee, name='delete-employee'),
+    path('list/', employees_list, name='employees-list'),
+    path('edit/<pk>', update_dashboard, name='edit-employee'),
+    path('delete/<pk>', delete_employee, name='delete-employee'),
     
 ]

@@ -7,14 +7,18 @@ from .forms import EmployeeForm
 
 # Create your views here.
 def register(request):
+    form = EmployeeForm()
+
     if request.method == 'POST':
-        name = request.POST['name']
-        mobile_number = request.POST['mobile_number']
-        email = request.POST['email']
-        
-        user=wallet(name=name, mobile_number=mobile_number, email=email)
-        user.save()
-    return render(request,'register.html')
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('employees-list')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'register.html', context)
 
 def get_otp():
     otp = "" 
@@ -77,8 +81,5 @@ def update_dashboard(request):
     }
     return render(request, 'update.html', context)
 
-def create_dashboard(request):
-    return render(request, 'create.html')
-
-def delete_dashboard(request):
+def delete_employee(request):
     return render(request, 'delete.html')
