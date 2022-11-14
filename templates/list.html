@@ -24,12 +24,6 @@
                     <td>{{ emp.name }}</td>
                     <td>{{ emp.email }}</td>
                     <td>{{ emp.mobile }}</td>
-                    {% comment %} <td>{{ emp.emp_role }}</td>
-                    <td>{{ emp.emp_salary }}</td> {% endcomment %}
-                    {% comment %} <td> {% endcomment %}
-                        {% comment %} <a style="margin-right: 30px;" href="{% url 'edit-employee' emp.id %}">Edit</a>
-                        <a href="{% url 'delete-employee' emp.id %}">Remove</a> {% endcomment %}
-                    </td>
                 </tr>
             {% endfor %}
         </tbody>

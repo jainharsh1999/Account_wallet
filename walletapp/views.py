@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from .models import *
 from django.shortcuts import redirect
 import random
 from .forms import EmployeeForm
+from django.views.decorators.csrf import csrf_protect 
 
 
 # Create your views here.
@@ -31,11 +32,11 @@ def login(request):
         mobile = request.POST['mobile']
         
         try: 
-            mob = Login.objects.get(mobile=mobile)
+            mob = wallet.objects.get(mobile=mobile)
             
         except:
-            Login.objects.create(mobile=mobile)
-            mob=Login.objects.get(mobile=mobile)    
+            wallet.objects.create(mobile=mobile)
+            mob=wallet.objects.get(mobile=mobile)    
             
         OTP=get_otp()
         mob.otp=OTP
@@ -50,19 +51,20 @@ def verify(request):
     
     if request.method == "POST":
         otp = request.POST.get('OTP')
-        verify = Login.objects.get(mobile=mobile)
+        verify = wallet.objects.get(mobile=mobile)
         
         if verify.otp == int(otp):
-            Login.objects.filter(mobile=mobile)
+            wallet.objects.filter(mobile=mobile)
             print("verify")
-            return redirect('register')
+            return redirect('/wallet_dashboard/'+str(verify.id))
         else:
             print("Wrong OTP!")
             
     return render(request,'verify.html')      
 
-def wallet_dashboard(request):
-    return render(request, 'wallet.html')
+def wallet_dashboard(request, pk):
+    user = wallet.objects.get(id=pk)
+    return render(request, 'wallet.html', {"user":user})
 
 def employees_list(request):
     employee = wallet.objects.all()
@@ -83,3 +85,25 @@ def update_dashboard(request):
 
 def delete_employee(request):
     return render(request, 'delete.html')
+
+
+
+@csrf_protect 
+def edit_amount(request):
+    
+    if request.method=="POST":
+        id = request.POST.get('id')
+        amount = request.POST.get('amount')
+        
+        user = wallet.objects.get(id = id)
+        useramount = int(user.amount)
+        useramount += int(amount)
+        
+        user.amount = str(useramount)
+        user.save()
+    
+        return HttpResponse("<h1>User</h1>"+user.name+"<br><h1>Amount</h1>"+user.amount)
+    
+    return render(request, 'add_amount.html')
+    
+    
