@@ -27,5 +27,7 @@ urlpatterns = [
     path('edit/<pk>', update_dashboard, name='edit-employee'),
     path('delete/<pk>', delete_employee, name='delete-employee'),
     path('amount', edit_amount, name='editAmount'),
+    path('nav', nav, name='nav'),
+    
     
 ]

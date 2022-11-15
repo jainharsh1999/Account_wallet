@@ -43,11 +43,11 @@ def login(request):
         #     wallet.objects.create(mobile=mobile)
         #     mob=wallet.objects.get(mobile=mobile)    
             
-            OTP=get_otp()
-            data.otp=OTP
-            data.save()
-            request.session['mobile']=mobile
-            return redirect("verify")
+        OTP=get_otp()
+        data.otp=OTP
+        data.save()
+        request.session['mobile']=mobile
+        return redirect("verify")
         
     return render(request, 'login.html')
 
@@ -114,3 +114,5 @@ def edit_amount(request):
     return render(request, 'add_amount.html')
     
     
+def nav(request):
+    return render(request,'nav.html')
