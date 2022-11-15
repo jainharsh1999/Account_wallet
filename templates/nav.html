@@ -1,7 +1,9 @@
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Wallet</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -40,7 +42,26 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+        <li><a href="/wallet"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+        <div class="summary-text">
+            My Balance
+          </div>
+          <div class="summary-balance" >
+            &#8377; {{ data.amount }}
+          </div>
+          <div class="summary-text-2">
+            +&nbsp;{{ data.amount }}
+          </div>  
+          <div class="classname">
+              {{ data.name }}
+          </div>
+          <div class="classname">
+              {{ data.email }}
+          </div>
+          <div class="classname">
+              {{ data.mobile }}
+          </div>
+          </div>
       </ul>
     </div>
   </div>
@@ -165,3 +186,4 @@
 
 </body>
 </html>
+{% endblock %}
