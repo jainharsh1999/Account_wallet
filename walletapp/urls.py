@@ -20,9 +20,9 @@ from .import views
 
 urlpatterns = [
     path('register', register, name='register'),
-    path('login', login, name='login'),
+    path('login/', login, name='login'),
     path('verify', verify, name='verify'), 
-    path('wallet_dashboard/<pk>', wallet_dashboard, name='wallet'),
+    path('wallet_dashboard/<int:mobile>', wallet_dashboard, name='wallet'),
     path('list/', employees_list, name='employees-list'),
     path('edit/<pk>', update_dashboard, name='edit-employee'),
     path('delete/<pk>', delete_employee, name='delete-employee'),

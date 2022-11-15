@@ -1,10 +1,10 @@
 from django import forms
 from django.forms import ModelForm
-from .models import wallet
+from .models import user_field
 
 class EmployeeForm(ModelForm):
     class Meta:
-        model = wallet
+        model = user_field
         
         fields = ('name', 'email', 'mobile')
 

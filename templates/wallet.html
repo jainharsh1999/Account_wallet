@@ -15,18 +15,27 @@
 		<form method="post">
 			{% csrf_token %}
 		<body>
-			<div class="container">
+			<div class="container"style="text-align:center">
 			  <div class="iphone">
 				<div class="header">
 				  <div class="header-summary">
 					<div class="summary-text">
 					  My Balance
 					</div>
-					<div class="summary-balance">
-					  &#8377; {{ user.amount }}
+					<div class="summary-balance" >
+					  &#8377; {{ data.amount }}
 					</div>
 					<div class="summary-text-2">
-					  +&nbsp;{{ user.amount }}
+					  +&nbsp;{{ data.amount }}
+					<div class="classname">
+						{{ data.name }}
+					</div>
+					<div class="classname">
+						{{ data.email }}
+					</div>
+					<div class="classname">
+						{{ data.mobile }}
+					</div>
 					</div>
 				  </div>
 				  <div class="user-profile">

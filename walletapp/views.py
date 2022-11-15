@@ -14,7 +14,7 @@ def register(request):
         form = EmployeeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('employees-list')
+            return redirect('login')
 
     context = {
         'form': form,
@@ -32,17 +32,22 @@ def login(request):
         mobile = request.POST['mobile']
         
         try: 
-            mob = wallet.objects.get(mobile=mobile)
+            data = user_field.objects.get(mobile=mobile)
+            # code = data.code
+            print("Login successfull") 
+        
+        except :
+            data=user_field.objects.create(mobile=mobile) # django will raise exception in case if number does not exist
+       
+            data = user_field.objects.get(mobile=mobile)
+        #     wallet.objects.create(mobile=mobile)
+        #     mob=wallet.objects.get(mobile=mobile)    
             
-        except:
-            wallet.objects.create(mobile=mobile)
-            mob=wallet.objects.get(mobile=mobile)    
-            
-        OTP=get_otp()
-        mob.otp=OTP
-        mob.save()
-        request.session['mobile']=mobile
-        return redirect("verify")
+            OTP=get_otp()
+            data.otp=OTP
+            data.save()
+            request.session['mobile']=mobile
+            return redirect("verify")
         
     return render(request, 'login.html')
 
@@ -51,23 +56,25 @@ def verify(request):
     
     if request.method == "POST":
         otp = request.POST.get('OTP')
-        verify = wallet.objects.get(mobile=mobile)
+        verify = user_field.objects.get(mobile=mobile)
         
         if verify.otp == int(otp):
-            wallet.objects.filter(mobile=mobile)
+            user_field.objects.filter(mobile=mobile)
             print("verify")
-            return redirect('/wallet_dashboard/'+str(verify.id))
+            return redirect('wallet', mobile)
         else:
             print("Wrong OTP!")
             
     return render(request,'verify.html')      
 
-def wallet_dashboard(request, pk):
-    user = wallet.objects.get(id=pk)
-    return render(request, 'wallet.html', {"user":user})
+def wallet_dashboard(request, mobile):
+    # user = wallet.objects.get(id=pk)
+    data =  user_field.objects.get(mobile=mobile)
+    # data2 = user_field.objects.all().order_by('-pk')[:4] 
+    return render(request, 'wallet.html', {"data":data})
 
 def employees_list(request):
-    employee = wallet.objects.all()
+    employee = user_field.objects.all()
     return render(request, 'list.html', {"employees":employee})
 
 def update_dashboard(request):
@@ -95,7 +102,7 @@ def edit_amount(request):
         id = request.POST.get('id')
         amount = request.POST.get('amount')
         
-        user = wallet.objects.get(id = id)
+        user = user.objects.get(id = id)
         useramount = int(user.amount)
         useramount += int(amount)
         
