@@ -121,3 +121,10 @@ def my_account(request,mobile):
     
       
     return render(request,'my_account.html',{ "data2":data2,"data3":data3})
+
+def transfer_money(request):
+    return render(request, 'transfer_money.html')
+
+def bank_statement(request):
+    emp = user_field.objects.get()
+    return render(request, 'bank_statement.html',{"emp":emp})

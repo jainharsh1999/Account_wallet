@@ -18,14 +18,16 @@
             </tr>
         </thead>
         <tbody>
-            {% for emp in employees %}
+           
                 <tr>
                     {% comment %} <th scope="row">{{ emp.emp_name }}</th> {% endcomment %}
                     <td>{{ emp.name }}</td>
+                    <br><br>
                     <td>{{ emp.email }}</td>
+                    <br><br>
                     <td>{{ emp.mobile }}</td>
                 </tr>
-            {% endfor %}
+         
         </tbody>
     </table>
 

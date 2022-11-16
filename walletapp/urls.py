@@ -23,9 +23,12 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('verify', verify, name='verify'), 
     path('wallet_dashboard/<str:mobile>', wallet_dashboard, name='wallet_dashboard'),
-    path('list/', employees_list, name='employees-list'),
+    path('bank_statement/', bank_statement, name='bank_statement'),
     path('edit/<pk>', update_dashboard, name='edit-employee'),
     path('delete/<pk>', delete_employee, name='delete-employee'),
-    path('amount', edit_amount, name='editAmount'),
+    path('edit_amount', edit_amount, name='editAmount'),
     path('my_account/<str:mobile>', my_account, name='my_account'),
+    path('transfer_money', transfer_money, name='transfer_money'),
+    
+    
 ]
