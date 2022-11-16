@@ -109,9 +109,15 @@ def edit_amount(request):
     
     
 def wallet_dashboard(request, mobile):
-    user_field.objects.filter(mobile=mobile)
-    return render(request, 'wallet_dashboard.html')
+    data1 = user_field.objects.filter(mobile=mobile).first()
+    request.session['mobile']=mobile
+    return render(request, 'wallet_dashboard.html', { "data1":data1})
 
-def my_account(request):
-    data =  user_field.objects.all() 
-    return render(request,'my_account.html', {"data":data})
+def my_account(request,mobile):
+    request.session['mobile']=mobile
+    data2 = user_field.objects.get(mobile=mobile)
+
+    data3 = wallet_payment.objects.get()
+    
+      
+    return render(request,'my_account.html',{ "data2":data2,"data3":data3})

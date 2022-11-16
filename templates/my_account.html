@@ -11,25 +11,26 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
+        
         <form method="post">
             {% csrf_token %}
         <div class="summary-text">
             My Balance
           </div>
           <div class="summary-balance" >
-            &#8377; {{ data.amount }}
+            &#8377; {{ data3.amount }}
           </div>
-          <div class="summary-text-2">
+          {% comment %} <div class="summary-text-2">
             +&nbsp;{{ data.amount }}
-          </div>  
+          </div>   {% endcomment %}
           <div class="classname">
-              {{ data.name }}
+              {{ data2.name }}
           </div>
           <div class="classname">
-              {{ data.email }}
+              {{ data2.email }}
           </div>
           <div class="classname">
-              {{ data.mobile }}
+              {{ data2.mobile }}
           </div>
         </form>
         <script src="" async defer></script>
