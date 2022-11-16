@@ -125,6 +125,7 @@ def my_account(request,mobile):
 def transfer_money(request):
     return render(request, 'transfer_money.html')
 
-def bank_statement(request):
-    emp = user_field.objects.get()
+def bank_statement(request, mobile):
+    emp = user_field.objects.get(mobile=mobile)
+    request.session['mobile']=mobile
     return render(request, 'bank_statement.html',{"emp":emp})

@@ -4,7 +4,7 @@ from .models import *
 # Register your models here.
 @admin.register(user_field)
 class user_fieldAdmin(admin.ModelAdmin):
-    list_display =  ['email', 'name', 'mobile','id']  
+    list_display =  ['email', 'name', 'mobile','Account_number']  
 
 @admin.register(wallet_payment)
 class wallet_paymentAdmin(admin.ModelAdmin):
