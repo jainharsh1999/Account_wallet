@@ -22,12 +22,13 @@ urlpatterns = [
     path('register', register, name='register'),
     path('login/', login, name='login'),
     path('verify', verify, name='verify'), 
-    path('wallet_dashboard/<int:mobile>', wallet_dashboard, name='wallet'),
+    path('wallet_dashboard/<int:mobile>', wallet_dashboard, name='wallet_dashboard'),
     path('list/', employees_list, name='employees-list'),
     path('edit/<pk>', update_dashboard, name='edit-employee'),
     path('delete/<pk>', delete_employee, name='delete-employee'),
     path('amount', edit_amount, name='editAmount'),
-    path('nav', nav, name='nav'),
+    path('my_account', my_account, name='my_account'),
+    
     
     
 ]

@@ -39,9 +39,7 @@ def login(request):
         except :
             data=user_field.objects.create(mobile=mobile) # django will raise exception in case if number does not exist
        
-            data = user_field.objects.get(mobile=mobile)
-        #     wallet.objects.create(mobile=mobile)
-        #     mob=wallet.objects.get(mobile=mobile)    
+            data = user_field.objects.get(mobile=mobile)   
             
         OTP=get_otp()
         data.otp=OTP
@@ -61,19 +59,15 @@ def verify(request):
         if verify.otp == int(otp):
             user_field.objects.filter(mobile=mobile)
             print("verify")
-            return redirect('wallet', mobile)
+            return redirect('wallet_dashboard', mobile)
         else:
             print("Wrong OTP!")
             
     return render(request,'verify.html')      
 
-def wallet_dashboard(request, mobile):
-    # user = wallet.objects.get(id=pk)
-    data =  user_field.objects.get(mobile=mobile)
-    # data2 = user_field.objects.all().order_by('-pk')[:4] 
-    return render(request, 'wallet.html', {"data":data})
 
-def employees_list(request):
+
+def employees_list(request): 
     employee = user_field.objects.all()
     return render(request, 'list.html', {"employees":employee})
 
@@ -114,5 +108,10 @@ def edit_amount(request):
     return render(request, 'add_amount.html')
     
     
-def nav(request):
-    return render(request,'nav.html')
+def wallet_dashboard(request, mobile):
+    user_field.objects.filter(mobile=mobile)
+    return render(request, 'wallet_dashboard.html')
+
+def my_account(request):
+    data =  user_field.objects.all() 
+    return render(request,'my_account.html', {"data":data})
