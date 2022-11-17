@@ -7,7 +7,7 @@ class user_field(models.Model):
     name = models.CharField(max_length=50,blank=True,null=True)
     mobile = models.IntegerField(blank=True,null=True)
     otp = models.IntegerField(blank=True,null=True)
-    Account_number = models.IntegerField(max_length=100, primary_key= True,null=True)
+    Account_number = models.IntegerField(max_length=50,blank=True,null=False)
     
     
 class wallet_payment(models.Model):
