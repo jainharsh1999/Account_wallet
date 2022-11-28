@@ -117,7 +117,7 @@ def my_account(request,mobile):
     request.session['mobile']=mobile
     data2 = user_field.objects.get(mobile=mobile)
 
-    data3 = wallet_payment.objects.get()
+    data3 = wallet_payment.objects.get(mobile=mobile)
     
       
     return render(request,'my_account.html',{ "data2":data2,"data3":data3})
