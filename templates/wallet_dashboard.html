@@ -7,10 +7,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <div class="fotter_name">
-  <span style="background-color: #555; color: white; padding: 15px;">    
+  <span style="background-color: #555; color: white; padding: 15px;"> 
+
   </div>
   </style>
 </head>
@@ -25,11 +27,36 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">Logo</a>
+      
+        <button class="openbtn" onclick="openNav()"></button>   
+      <img src="{{data1.profile_image.url}}" style="vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;" onclick="openNav()">
+       <div id="mySidepanel" class="sidepanel">
+      <img src="{{data1.profile_image.url}}" style="vertical-align: middle; width: 75px; height: 75px; border-radius: 50%; margin-left:30%;">
+      <form method="post">
+        {% csrf_token %}        
+     <br>        
+     <br>              
+    <img src={{data1.qr_code.url}} style="width:65%; height:65%; color:white; margin-left:15%;">
+    <br>  
+    <br>   
+    <span style="color:white; margin-left:10%;">UPI ID: {{ data1.mobile }}@fastpay</span> 
+    <br>   
+
+    <span style="color:white; margin-left:30%;">{{ data1.mobile }}</span>
+
+
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+      </div>
+         
+      
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="{% url 'wallet_dashboard' data1.mobile %}">Home</a></li>
         <li><a href="#">Messages</a></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
@@ -41,12 +68,13 @@
             </button>
           </span>        
         </div>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href= "{% url 'my_account' data1.mobile %}"> My Account</a></li>
+        {% comment %} <div> {% endcomment %}
+          <h1 style="color:white; text-align: center; margin-left:1%;">fastpay</h1><a href= "{% url 'my_account' data1.mobile %}" style="padding-left:9 2;  margin-bottom: 25%; color:white;">My Account</a>
+        {% comment %} </div> {% endcomment %}
         
-          </div>
-      </ul>
+
+      </form>
+    
     </div>
   </div>
 </nav>
@@ -55,8 +83,8 @@
   <div class="row">
     <div class="col-sm-3 well">
       <div class="well">
-        <p><a href="#">My Profile</a></p>
-        <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+        {% comment %} <li><a href="{% url 'myprofile' data4.mobile %}">My Profile</a></li> {% endcomment %}
+        {% comment %} <li><a href= "{% url 'pay' data1.mobile %}">Pay</a></li> {% endcomment %}
       </div>
       <div class="well">
         <p><a href="#">Interests</a></p>
@@ -167,7 +195,15 @@
 <footer class="container-fluid text-center">
   <p>Footer Text</p>
 </footer>
-
+<script>
+  function openNav() {
+    document.getElementById("mySidepanel").style.width = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidepanel").style.width = "0";
+  }
+  </script> 
 </body>
 </html>
 {% endblock %}

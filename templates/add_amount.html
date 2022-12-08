@@ -2,7 +2,7 @@
 {% block content %}
 <html lang="en">
   <head>
-    <title>Register page</title>
+    <title>Add Money</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -12,15 +12,15 @@
               class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5" style="text-align: center">
               <form style="width: 23rem" action ="" method="post">
                {% csrf_token %}
-
-
-                <div
+               <h>Add Money<h>
+               <div
                   class="form-outline mb-4"
                   style="text-align: center; padding: 10px">
-                  <label class="form-label" for="form2Example28">Id: </label>
-                 <input type="text"  name="id" placeholder="id" style=" padding: 8px; border: none; border-bottom: 2px solid grey;"
+                  <label class="form-label" >Mobile: </label>
+                 <input type="text"  name="mobile" placeholder="mobile" style=" padding: 8px; border: none; border-bottom: 2px solid grey;"
                     class="form-control form-control-lg"/>
-                  <label class="form-label" for="form2Example28">Add Amount: </label>
+                    <br>
+                  <label class="form-label">Add Amount: </label>
                  <input type="text"  name="amount" placeholder="Add Amount" style=" padding: 8px; border: none; border-bottom: 2px solid grey;"
                     class="form-control form-control-lg"/>
                 </div>

@@ -90,20 +90,24 @@ def delete_employee(request):
 
 
 @csrf_protect 
-def edit_amount(request):
+def edit_amount(request, mobile):
+    request.session['mobile']=mobile
+    
+    
     
     if request.method=="POST":
-        id = request.POST.get('id')
-        amount = request.POST.get('amount')
+        # mobile = request.POST.get('mobile')
+        amount = request.POST['amount']
+        data2 = user_field.objects.get(mobile=mobile)
+        # user = user.objects.get(mobile = mobile)
+        balance=int(data2.amount)
         
-        user = user.objects.get(id = id)
-        useramount = int(user.amount)
-        useramount += int(amount)
+        balance += int(amount)
         
-        user.amount = str(useramount)
-        user.save()
+        data2.amount = str(balance)
+        data2.save()
     
-        return HttpResponse("<h1>User</h1>"+user.name+"<br><h1>Amount</h1>"+user.amount)
+        return redirect('my_account',mobile)
     
     return render(request, 'add_amount.html')
     
@@ -115,12 +119,8 @@ def wallet_dashboard(request, mobile):
 
 def my_account(request,mobile):
     request.session['mobile']=mobile
-    data2 = user_field.objects.get(mobile=mobile)
-
-    data3 = wallet_payment.objects.get(mobile=mobile)
-    
-      
-    return render(request,'my_account.html',{ "data2":data2,"data3":data3})
+    data2 = user_field.objects.filter(mobile=mobile).first()  
+    return render(request,'my_account.html',{ "data2":data2, })
 
 def transfer_money(request):
     return render(request, 'transfer_money.html')
@@ -129,3 +129,8 @@ def bank_statement(request, mobile):
     emp = user_field.objects.get(mobile=mobile)
     request.session['mobile']=mobile
     return render(request, 'bank_statement.html',{"emp":emp})
+
+def myprofile(request, mobile):
+    data4 = user_field.objects.filter(mobile=mobile).first()
+    request.session['mobile']=mobile
+    return render(request, 'my_profile.html', {"data4":data4})

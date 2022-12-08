@@ -14,13 +14,13 @@
         
         <form method="post">
             {% csrf_token %}
-         
+            {% comment %} {% if i %} {% endcomment %}
             <img src="{{data2.profile_image.url}}" style="vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;">
-         
+            {% comment %} {% endif %} {% endcomment %}
         <br>       
         <br>       
         <div class="ui container">
-          <img src={{data2.qr_code.url}} style="width:10%; height:8%;">
+          <img src={{data2.qr_code.url}}>
         <div>  
         <span>UPI ID: {{ data2.mobile }}@fastpay</span>
         <br>       
@@ -55,7 +55,7 @@
           <br><br>
           <a href="/bank_statement">Bank statement</a>
         </form>
-        <script src="" async defer></script>
+        <script src="" async defer></script> 
     </body>
 </html>
 {% endblock %}
